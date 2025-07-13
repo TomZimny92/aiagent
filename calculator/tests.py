@@ -2,7 +2,7 @@ import unittest
 from pkg.calculator import Calculator
 
 class TestCalculator(unittest.TestCase):
-    def setUp(sef):
+    def setUp(self):
         self.calculator = Calculator()
 
     def test_addition(self):
