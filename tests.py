@@ -4,6 +4,7 @@ from functions.get_file_content import *
 class TestGetFilesInfo(unittest.TestCase):
     def testDot(self):
         result = get_file_content("calculator", "lorem.txt")
+        print(result)
         self.assertIn('[...File', result)
 #        expected = []
 #        expected.append("- tests.py: file_size=1349 bytes, is_dir=False")
@@ -15,6 +16,7 @@ class TestGetFilesInfo(unittest.TestCase):
 
     def testFolder(self):
         result = get_file_content("calculator", "pkg/calculator.py")
+        print(result)
         self.assertIn('class Calculator', result)
 #        expected = []
 #        expected.append("- calculator.py: file_size=1779 bytes, is_dir=False")
@@ -26,6 +28,7 @@ class TestGetFilesInfo(unittest.TestCase):
 
     def testOutOfBoundsBin(self):
         result = get_file_content("calculator", "/bin/cat")
+        print(result)
         self.assertIn('Error:', result)
 #        expected = f'Error: Cannot list "/bin" as it is outside the permitted working directory'
 #        print(expected)
@@ -33,6 +36,7 @@ class TestGetFilesInfo(unittest.TestCase):
 
     def testOutOfBoundsBack(self):
         result = get_file_content("calculator", "pkg/does_not_exist.py")
+        print(result)
         self.assertIn('Error:', result)
 #        expected = f'Error: Cannot list "../" as it is outside the permitted working directory'
 #        print(expected)

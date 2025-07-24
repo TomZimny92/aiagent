@@ -12,8 +12,9 @@ def get_file_content(working_directory, file_path):
             return f'Error: File not found or is not a regular file: "{file_path}"'
         with open(full_abs_path, "r") as f:
             raw_file = f.read()
+            print(f"raw_file: {raw_file}")
+            f.seek(0)
             if len(raw_file) > MAX_CHARS:
-                f.seek(0)
                 file_content_string = f.read(MAX_CHARS)
                 file_content_string = file_content_string + f'[...File "{full_abs_path}" truncated at {MAX_CHARS} characters]'
                 return file_content_string
