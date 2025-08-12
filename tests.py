@@ -1,46 +1,39 @@
 import unittest
 from functions.get_file_content import *
+from functions.write_file import *
 
 class TestGetFilesInfo(unittest.TestCase):
     def testDot(self):
-        result = get_file_content("calculator", "lorem.txt")
+        result = write_file("calculator", "lorem.txt", "wait, this isn't lorem ipsum")
         print(result)
-        self.assertIn('[...File', result)
-#        expected = []
-#        expected.append("- tests.py: file_size=1349 bytes, is_dir=False")
-#        expected.append("- main.py: file_size=563 bytes, is_dir=False")
-#        expected.append("- pkg: file_size=4096 bytes, is_dir=True")
-#        final_expected = "\n".join(expected)
-#        print(final_expected)
-#        self.assertEqual(result, final_expected)
-
+        self.assertIn('Successfully', result)
     def testFolder(self):
-        result = get_file_content("calculator", "pkg/calculator.py")
+        result = write_file("calculator", "pkg/morelorem.txt", "lorem ipsum dolor sit amet")
         print(result)
-        self.assertIn('class Calculator', result)
-#        expected = []
-#        expected.append("- calculator.py: file_size=1779 bytes, is_dir=False")
-#        expected.append("- __pycache__: file_size=4096 bytes, is_dir=True")
-#        expected.append("- render.py: file_size=774 bytes, is_dir=False")
-#        final_expected = "\n".join(expected)
-#        print(final_expected)
-#        self.assertEqual(result, final_expected)
+        self.assertIn('Successfully', result)
+    def testDenied(self):
+        result = write_file("calculator", "/tmp/temp.txt", "this should not be allowed")
+        print(result)
+        self.assertIn('Error', result)
+   # def testDot(self):
+   #     result = get_file_content("calculator", "main.py")
+   #     print(result)
+   #     self.assertIn('def main():', result)
 
-    def testOutOfBoundsBin(self):
-        result = get_file_content("calculator", "/bin/cat")
-        print(result)
-        self.assertIn('Error:', result)
-#        expected = f'Error: Cannot list "/bin" as it is outside the permitted working directory'
-#        print(expected)
-#        self.assertEqual(result, expected)
+   # def testFolder(self):
+   #     result = get_file_content("calculator", "pkg/calculator.py")
+   #     print(result)
+   #     self.assertIn('def _apply_operator(self, operators, values)', result)
 
-    def testOutOfBoundsBack(self):
-        result = get_file_content("calculator", "pkg/does_not_exist.py")
-        print(result)
-        self.assertIn('Error:', result)
-#        expected = f'Error: Cannot list "../" as it is outside the permitted working directory'
-#        print(expected)
-#        self.assertEqual(result, expected)
+   # def testOutOfBoundsBin(self):
+   #     result = get_file_content("calculator", "/bin/cat")
+   #     print(result)
+   #     self.assertIn('Error:', result)
+
+   # def testOutOfBoundsBack(self):
+   #     result = get_file_content("calculator", "pkg/does_not_exist.py")
+   #     print(result)
+   #     self.assertIn('Error:', result)
 
 if __name__ == "__main__":
     unittest.main()

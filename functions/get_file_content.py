@@ -12,7 +12,8 @@ def get_file_content(working_directory, file_path):
             return f'Error: File not found or is not a regular file: "{file_path}"'
         with open(full_abs_path, "r") as f:
             raw_file = f.read()
-            print(f"raw_file: {raw_file}")
+            print(f'Content start: {raw_file[:100]}') # This will show the first 100 characters
+            print(f"length of raw_file: {len(raw_file)}")
             f.seek(0)
             if len(raw_file) > MAX_CHARS:
                 file_content_string = f.read(MAX_CHARS)
